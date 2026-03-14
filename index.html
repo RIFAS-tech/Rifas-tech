@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rifas Tech</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#0f172a;color:white;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;max-width:600px;margin:auto}
+.num{background:#16a34a;padding:10px;border-radius:5px}
+.sold{background:#dc2626}
+button{padding:10px;margin-top:10px}
+</style>
+</head>
+
+<body>
+
+<h1>Rifas Tech</h1>
+
+<h2>Rifa iPhone 17 Pro</h2>
+
+<p>200 números disponibles</p>
+<p>$50.000 por número</p>
+
+<p>
+iPhone 17 Pro<br>
+256GB<br>
+5G<br>
+Chip Apple A19 Pro
+</p>
+
+<div class="grid" id="grid"></div>
+
+<h3>Registrar compra</h3>
+
+<input id="nombre" placeholder="Nombre"><br><br>
+<input id="telefono" placeholder="Teléfono"><br><br>
+
+<button onclick="comprar()">Asignar número</button>
+
+<p id="resultado"></p>
+
+<script>
+
+let total=200
+let vendidos=[]
+
+function cargar(){
+
+let grid=document.getElementById("grid")
+
+grid.innerHTML=""
+
+for(let i=1;i<=total;i++){
+
+let d=document.createElement("div")
+
+d.className="num"+(vendidos.includes(i)?" sold":"")
+
+d.innerText=i
+
+grid.appendChild(d)
+
+}
+
+}
+
+cargar()
+
+function comprar(){
+
+let disponibles=[]
+
+for(let i=1;i<=total;i++){
+
+if(!vendidos.includes(i)){
+
+disponibles.push(i)
+
+}
+
+}
+
+if(disponibles.length==0){
+
+resultado.innerText="Rifa agotada"
+
+return
+
+}
+
+let numero=disponibles[Math.floor(Math.random()*disponibles.length)]
+
+vendidos.push(numero)
+
+resultado.innerText="Tu número asignado es: "+numero
+
+cargar()
+
+}
+
+</script>
+
+</body>
+</html>
